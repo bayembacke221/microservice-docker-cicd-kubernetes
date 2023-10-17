@@ -28,9 +28,9 @@ services:
       - postgres
     restart: unless-stopped
 
-  admission_service:
-    image: bayembacke221/admission:latest
-    container_name: admission_service
+  admissions:
+    image: bayembacke221/admission:0.0.1-SNAPSHOT
+    container_name: admissions
     ports:
       - "8083:8083"
     environment:
@@ -40,9 +40,9 @@ services:
       - postgres
     depends_on:
       - postgres
-  examen_service:
-    image: bayembacke221/examen:latest
-    container_name: examen_service
+  examens:
+    image: bayembacke221/examen:0.0.1-SNAPSHOT
+    container_name: examens
     ports:
       - "8082:8082"
     environment:
@@ -52,9 +52,9 @@ services:
       - postgres
     depends_on:
       - postgres
-  inscripcion_service:
+  inscriptions:
     image: bayembacke221/inscription:latest
-    container_name: inscripcion_service
+    container_name: inscriptions
     ports:
       - "8081:8081"
     environment:

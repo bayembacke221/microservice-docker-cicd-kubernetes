@@ -15,3 +15,9 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
+
+  clients:
+    inscription:
+      url: http://inscriptions:8081
+    examen:
+      url: http://examens:8082
