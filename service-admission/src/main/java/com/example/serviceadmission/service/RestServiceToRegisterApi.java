@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-@FeignClient(name = "etudiant-api", url = "http://localhost:8081/etudiant")
+@FeignClient(name = "etudiant-api", url = "http://inscripcion_service:8081/etudiant")
 public interface RestServiceToRegisterApi {
 
     /**

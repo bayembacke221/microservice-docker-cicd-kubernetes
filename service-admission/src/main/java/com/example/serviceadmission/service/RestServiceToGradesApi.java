@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-@FeignClient(name = "examen-api", url = "http://localhost:8082/moyenne")
+@FeignClient(name = "examen-api", url = "http://examen_service:8082/moyenne")
 public interface RestServiceToGradesApi {
 
     @RequestMapping(method = RequestMethod.GET, value = "/all")
