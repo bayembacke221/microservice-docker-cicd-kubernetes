@@ -1,12 +1,38 @@
+#server:
+#  port: 8081
+#spring:
+#  application:
+#    name: etudiant-service-api
+#  datasource:
+#    password: password
+#    url: jdbc:postgresql://localhost:5432/inscription
+#    username: bmbacke
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        format_sql: true
+#    show-sql: true
+#
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
+#    fetch-registry: true
+#    register-with-eureka: true
+#    enabled: false
+
 server:
   port: 8081
 spring:
   application:
     name: etudiant-service-api
   datasource:
-    password: password
+    password: bayembacke221
     url: jdbc:postgresql://localhost:5432/inscription
-    username: bmbacke
+    username: postgres
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,3 +41,12 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost

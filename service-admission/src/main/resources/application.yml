@@ -1,12 +1,45 @@
+#server:
+#  port: 8083
+#spring:
+#  application:
+#    name: service-admission
+#  datasource:
+#    password: password
+#    url: jdbc:postgresql://localhost:5432/admission
+#    username: bmbacke
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        format_sql: true
+#    show-sql: true
+#
+#
+#clients:
+#  inscription:
+#    url: http://localhost:8081
+#  examen:
+#    url: http://localhost:8082
+#
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
+#    fetch-registry: true
+#    register-with-eureka: true
+#    enabled: false
+
 server:
   port: 8083
 spring:
   application:
     name: service-admission
   datasource:
-    password: password
+    password: bayembacke221
     url: jdbc:postgresql://localhost:5432/admission
-    username: bmbacke
+    username: postgres
   jpa:
     hibernate:
       ddl-auto: update
@@ -22,3 +55,12 @@ clients:
     url: http://localhost:8081
   examen:
     url: http://localhost:8082
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost

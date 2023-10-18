@@ -1,3 +1,38 @@
+#server:
+#  port: 8082
+#spring:
+#  cloud:
+#    loadbalancer:
+#      ribbon:
+#        enable: false
+#  application:
+#    name: examen-api
+#  datasource:
+#    password: password
+#    url: jdbc:postgresql://localhost:5432/examen
+#    username: bmbacke
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        format_sql: true
+#    show-sql: true
+#
+#
+#clients:
+#  inscription:
+#    url: http://localhost:8081
+#
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
+#    fetch-registry: true
+#    register-with-eureka: true
+#    enabled: false
+
 server:
   port: 8082
 spring:
@@ -8,9 +43,9 @@ spring:
   application:
     name: examen-api
   datasource:
-    password: password
+    password: bayembacke221
     url: jdbc:postgresql://localhost:5432/examen
-    username: bmbacke
+    username: postgres
   jpa:
     hibernate:
       ddl-auto: update
@@ -24,3 +59,12 @@ spring:
 clients:
   inscription:
     url: http://localhost:8081
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
