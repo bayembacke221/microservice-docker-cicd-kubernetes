@@ -28,6 +28,13 @@ services:
       - postgres
     restart: unless-stopped
 
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - spring
   admissions:
     image: bayembacke221/admission:0.0.1-SNAPSHOT
     container_name: admissions
@@ -40,6 +47,7 @@ services:
       - postgres
     depends_on:
       - postgres
+      - zipkin
   examens:
     image: bayembacke221/examen:0.0.1-SNAPSHOT
     container_name: examens
@@ -52,6 +60,7 @@ services:
       - postgres
     depends_on:
       - postgres
+      - zipkin
   inscriptions:
     image: bayembacke221/inscription:0.0.1-SNAPSHOT
     container_name: inscriptions
@@ -64,13 +73,8 @@ services:
       - postgres
     depends_on:
       - postgres
-  zipkin:
-    image: openzipkin/zipkin
-    container_name: zipkin
-    ports:
-      - "9411:9411"
-    networks:
-      - spring
+      - zipkin
+
   eureka-server:
     image: bayembacke221/eureka-server:0.0.1-SNAPSHOT
     container_name: eureka-server
