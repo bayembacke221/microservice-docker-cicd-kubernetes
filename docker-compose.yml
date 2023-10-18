@@ -53,7 +53,7 @@ services:
     depends_on:
       - postgres
   inscriptions:
-    image: bayembacke221/inscription:latest
+    image: bayembacke221/inscription:0.0.1-SNAPSHOT
     container_name: inscriptions
     ports:
       - "8081:8081"
@@ -64,6 +64,24 @@ services:
       - postgres
     depends_on:
       - postgres
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - spring
+  eureka-server:
+    image: bayembacke221/eureka-server:0.0.1-SNAPSHOT
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+    depends_on:
+      - zipkin
 
 networks:
   postgres:
