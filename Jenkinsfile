@@ -16,11 +16,11 @@ pipeline {
       steps {
         // Build each microservice
         for (def service in ['service-discovery', 'service-admission', 'service-inscription', 'service-examen', 'api-gateway']) {
-          sh 'mvn clean package -DskipTests -f microservices/$service'
+          bat 'mvn clean package -DskipTests -f microservices/$service'
         }
 
         // Build the Docker images
-        sh 'docker-compose build'
+        bat 'docker-compose build'
       }
     }
 
