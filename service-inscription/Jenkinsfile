@@ -1,0 +1,39 @@
+pipeline =  {
+    stage('Checkout') {
+        checkout scm
+    }
+    stage('Preparation') {
+        dir('service-inscription') {
+            pom = readMavenPom file: 'pom.xml'
+            bat 'echo pom.version'
+            IMAGE = pom.artifactId
+            VERSION = pom.version
+        }
+    }
+    stage ('Compile Stage') {
+        dir('service-inscription') {
+            bat 'mvn clean compile'
+        }
+    }
+    stage ('Testing Stage') {
+        dir('service-inscription') {
+            bat 'mvn test'
+        }
+    }
+    stage ('Package Stage') {
+        dir('service-inscription') {
+            bat 'mvn clean package'
+        }
+    }
+    stage('Sonar build') {
+        dir ('service-inscription') {
+            bat 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install'
+        }
+    }
+    stage('Sonar Analysis') {
+        dir ('service-inscription') {
+            bat 'mvn sonar:sonar'
+        }
+    }
+
+}
