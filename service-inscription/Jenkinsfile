@@ -11,7 +11,7 @@ pipeline{
         }
         stage ('Build') {
             steps{
-                bat 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -f "D:\windows 11\JEE\workspaces\microservice-docker-cicd-kubernetes\service-inscription\pom.xml"'
+                bat 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -f d/windows/JEE/workspaces/microservice-docker-cicd-kubernetesservice-inscription/pom.xml'
             }
         }
         stage ('SonarQube Analysis') {
