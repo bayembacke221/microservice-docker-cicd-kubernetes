@@ -8,8 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 class ServiceInscriptionApplicationTests {
 
     @Test
-    public void contextLoads() {
-        SpringApplication.run(ServiceInscriptionApplication.class);
+    void contextLoads() {
     }
-
 }
