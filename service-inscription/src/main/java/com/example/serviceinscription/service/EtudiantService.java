@@ -74,7 +74,7 @@ public class EtudiantService {
      * @param etudiant
      * @return boolean booleen permettant de savoir ou pas si l'objet etudiant reçu est valide.
      */
-    private boolean validationEtudiant(Etudiant etudiant) {
+    public boolean validationEtudiant(Etudiant etudiant) {
         /*
         verifier que l'objet envoyé n'est pas null, mais aussi que l'id (numCarte) donné n'est pas null ou vide
          */
