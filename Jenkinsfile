@@ -1,46 +1,37 @@
-# Définir la version de Maven
-maven_version = '3.9.4'
+pipeline {
+    agent any
 
-# Définir les variables d'environnement
-DOCKER_HUB_USERNAME = 'bayembacke221'
-DOCKER_HUB_PASSWORD = 'Bayembacke221'
-
-# Définir les stages du pipeline
-stages {
-  stage('Récupérer le code') {
-    steps {
-      git(url: 'https://github.com/bayembacke221/microservice-docker-cicd-kubernetes.git', branch: 'main')
+    environment {
+        MAVEN_HOME = tool name: 'Maven 3.9.4', type: 'maven'
     }
-  }
 
-  stage('Vérifier la version de Maven') {
-    steps {
-      sh('mvn --version')
-    }
-  }
+    stages {
+        stage('Checkout from GitHub') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/bayembacke221/microservice-docker-cicd-kubernetes.git']]])
+            }
+        }
 
-  stage('Build du projet') {
-    steps {
-      sh('mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install')
-      sh('mvn sonar:sonar')
-    }
-  }
+        stage('Check Maven Version') {
+            steps {
+                sh "${MAVEN_HOME}/bin/mvn --version"
+            }
+        }
 
-  stage('Build image') {
-    steps {
-      for (def service in ['service-admission', 'service-inscription', 'service-examen']) {
-        sh('mvn clean package -DskipTests -f microservice-code/$service')
-        sh('docker build -t bayembacke221/$service:latest microservice-code/$service')
-      }
-    }
-  }
+        stage('Build and Test') {
+            steps {
+                sh "${MAVEN_HOME}/bin/mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install"
+            }
+        }
 
-  stage('Push image') {
-    steps {
-      for (def service in ['service-admission', 'service-inscription', 'service-examen']) {
-        sh('docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD')
-        sh('docker push bayembacke221/$service:latest')
-      }
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('Your_SonarQube_Server') {
+                    sh "${MAVEN_HOME}/bin/mvn sonar:sonar"
+                }
+            }
+        }
+
+
     }
-  }
 }
