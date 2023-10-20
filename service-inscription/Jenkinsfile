@@ -1,38 +1,23 @@
-pipeline =  {
-    stage('Checkout') {
-        checkout scm
+pipeline{
+    agent any
+    tools{
+        maven "3.9.4"
     }
-    stage('Preparation') {
-        dir('service-inscription') {
-            pom = readMavenPom file: 'pom.xml'
-            bat 'echo pom.version'
-            IMAGE = pom.artifactId
-            VERSION = pom.version
+    stages{
+        stage('Source') {
+            steps{
+                git branch: 'main', url: 'https://github.com/bayembacke221/microservice-docker-cicd-kubernetes.git'
+            }
         }
-    }
-    stage ('Compile Stage') {
-        dir('service-inscription') {
-            bat 'mvn clean compile'
+        stage ('Build') {
+            steps{
+                bat 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install'
+            }
         }
-    }
-    stage ('Testing Stage') {
-        dir('service-inscription') {
-            bat 'mvn test'
-        }
-    }
-    stage ('Package Stage') {
-        dir('service-inscription') {
-            bat 'mvn clean package'
-        }
-    }
-    stage('Sonar build') {
-        dir ('service-inscription') {
-            bat 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install'
-        }
-    }
-    stage('Sonar Analysis') {
-        dir ('service-inscription') {
-            bat 'mvn sonar:sonar'
+        stage ('SonarQube Analysis') {
+            steps{
+                bat 'mvn sonar:sonar'
+            }
         }
     }
 
