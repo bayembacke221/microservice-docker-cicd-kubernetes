@@ -19,6 +19,12 @@ pipeline{
                 bat 'mvn sonar:sonar -f "service-inscription/pom.xml"'
             }
         }
+        stage('Build image docker') {
+
+            steps {
+                bat 'docker build -t bayembacke221/inscription:0.0.1-SNAPSHOT .'
+            }
+        }
     }
 
 }
