@@ -16,7 +16,7 @@ pipeline{
         }
         stage ('SonarQube Analysis') {
             steps{
-                bat 'mvn sonar:sonar'
+                bat 'mvn sonar:sonar -f "service-inscription/pom.xml"'
             }
         }
     }
