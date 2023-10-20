@@ -1,35 +1,43 @@
 pipeline {
-    agent any
+  agent any
 
-    tools {
-        maven "3.9.4"
+   tools {
+          maven "3.9.4"
+      }
+
+  stages {
+    stage('Checkout') {
+      steps {
+        git branch: 'main', url: 'https://github.com/bayembacke221/microservice-docker-cicd-kubernetes.git'
+      }
     }
 
-    stages {
-        stage('Checkout from GitHub') {
-            steps {
-                  git branch: 'main', url: 'https://github.com/bayembacke221/microservice-docker-cicd-kubernetes.git'
-            }
+    stage('Build') {
+      steps {
+        // Build each microservice
+        for (def service in ['service-discovery', 'service-admission', 'service-inscription', 'service-examen', 'api-gateway']) {
+          sh 'mvn clean package -DskipTests -f microservices/$service'
         }
 
-        stage('Check Maven Version') {
-            steps {
-                bat 'mvn --version'
-            }
-        }
-
-        stage('Build and Test') {
-            steps {
-                bat 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install'
-            }
-        }
-
-        stage('SonarQube Analysis') {
-             steps{
-                bat 'mvn sonar:sonar'
-             }
-        }
-
-
+        // Build the Docker images
+        sh 'docker-compose build'
+      }
     }
+
+    stage('Test') {
+      steps {
+        // Run tests for each microservice
+        for (def service in ['service-discovery', 'service-admission', 'service-inscription', 'service-examen', 'api-gateway']) {
+          bat 'mvn test -f microservices/$service'
+        }
+      }
+    }
+
+    stage('Deploy') {
+      steps {
+        // Deploy the Docker images to production
+        bat 'docker-compose up -d'
+      }
+    }
+  }
 }
