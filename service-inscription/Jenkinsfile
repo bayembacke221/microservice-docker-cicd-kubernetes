@@ -45,29 +45,6 @@ pipeline{
               }
         }
     }
-    post {
-        aborted {
-          echo "Sending message to agent"
-        }
-        success {
-          emailext(
-            subject: "Build Successful: ${currentBuild.fullDisplayName}",
-            body: "The build was successful. No further action is required.\n \n Build URL: $BUILD_URL",
-            recipientProviders: [culprits(), developers()],
-            replyTo: "mbackembaye74@gmail.com",
-            to: "mbackembaye74@gmail.com"
-          )
-        }
-        failure {
-          emailext(
-            subject: "Build Failed: ${currentBuild.fullDisplayName}",
-            body: "The build has failed. Please investigate and take necessary action. \n \n Build URL: $BUILD_URL",
-            recipientProviders: [culprits(), developers()],
-            replyTo: "mbackembaye74@gmail.com",
-            to: "mbackembaye74@gmail.com"
-          )
-        }
 
-      }
 
 }
