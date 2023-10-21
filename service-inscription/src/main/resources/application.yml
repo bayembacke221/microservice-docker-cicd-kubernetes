@@ -28,8 +28,6 @@ eureka:
     hostname: localhost
 
 
-
-
 #server:
 #  port: 8081
 #spring:
