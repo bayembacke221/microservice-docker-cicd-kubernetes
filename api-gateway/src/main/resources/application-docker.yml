@@ -2,10 +2,10 @@ server:
   port: 8989
 
 spring:
-  application:
-    name: api-gateway
   zipkin:
     base-url: http://zipkin:9411
+  application:
+    name: api-gateway
   cloud:
     gateway:
       routes:

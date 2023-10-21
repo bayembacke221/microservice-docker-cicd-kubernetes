@@ -53,21 +53,6 @@
 		</dependencies>
 	</dependencyManagement>
 
-	<!-- Profile added(after </dependencies>... ) -->
-	<profiles>
-		<profile>
-			<id>sonar</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<sonar.host.url>http://localhost:9000</sonar.host.url>
-				<sonar.login>admin</sonar.login>
-				<sonar.password>mbacke</sonar.password>
-			</properties>
-		</profile>
-	</profiles>
-	<!-- Profile ends for Sonar -->
 
 	<build>
 		<plugins>
