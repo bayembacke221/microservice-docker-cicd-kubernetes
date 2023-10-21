@@ -19,12 +19,55 @@ pipeline{
                 bat 'mvn sonar:sonar -f "service-inscription/pom.xml"'
             }
         }
-        stage('Build image docker') {
+       /** stage('Build image docker') {
 
             steps {
                 bat 'docker build -t bayembacke221/inscription:0.0.1-SNAPSHOT . -f "service-inscription"'
             }
         }
+        stage('login docker') {
+
+             steps {
+                bat 'docker login -u "bayembacke221" -p "dckr_pat_hV3vs_E02ff-TxRCVaHrGz2vBC4"'
+            }
+        }
+        stage('Push image to docker hub'){
+            steps{
+                bat 'docker psuh bayembacke221/inscription:0.0.1-SNAPSHOT -f "service-inscription"'
+            }
+        } **/
+        stage('Approve Deployment') {
+              input {
+                message "Do you want to proceed for deployment?"
+              }
+              steps {
+                sh 'echo "Deploying into Server"'
+              }
+        }
     }
+    post {
+        aborted {
+          echo "Sending message to agent"
+        }
+        success {
+          emailext(
+            subject: "Build Successful: ${currentBuild.fullDisplayName}",
+            body: "The build was successful. No further action is required.\n \n Build URL: $BUILD_URL",
+            recipientProviders: [culprits(), developers()],
+            replyTo: "mbackembaye74@gmail.com",
+            to: "mbackembaye74@gmail.com"
+          )
+        }
+        failure {
+          emailext(
+            subject: "Build Failed: ${currentBuild.fullDisplayName}",
+            body: "The build has failed. Please investigate and take necessary action. \n \n Build URL: $BUILD_URL",
+            recipientProviders: [culprits(), developers()],
+            replyTo: "mbackembaye74@gmail.com",
+            to: "mbackembaye74@gmail.com"
+          )
+        }
+
+      }
 
 }
