@@ -1,6 +1,7 @@
 package com.example.serviceinscription.controller;
 
 
+import com.example.serviceinscription.dto.EtudiantDto;
 import com.example.serviceinscription.exception.EtudiantInconnuExecption;
 import com.example.serviceinscription.exception.InvalideEtudiantException;
 import com.example.serviceinscription.model.Etudiant;
@@ -27,7 +28,7 @@ public class EtudiantController {
      * @return Liste des etudiants
      */
     @GetMapping("/all")
-    public ResponseEntity<List<Etudiant>> getAllEtudiant() {
+    public ResponseEntity<List<EtudiantDto>> getAllEtudiant() {
         return ResponseEntity.ok(etudiantService.getAllEtudiant());
     }
 
@@ -37,7 +38,7 @@ public class EtudiantController {
      * @return
      */
     @GetMapping("/{numCarte}")
-    public ResponseEntity<Etudiant> getEtudiantById(
+    public ResponseEntity<EtudiantDto> getEtudiantById(
             @PathVariable("numCarte") String numCarte) {
         return ResponseEntity.ok(etudiantService.getEtudiantById(numCarte));
     }
@@ -50,7 +51,7 @@ public class EtudiantController {
      */
     @PostMapping
     public ResponseEntity ajouterEtudiant(
-            @RequestBody  Etudiant etudiant) throws InvalideEtudiantException {
+            @RequestBody  EtudiantDto etudiant) throws InvalideEtudiantException {
         etudiantService.ajouterNouveauEtudiant(etudiant);
         return ResponseEntity.ok().build();
     }
@@ -64,7 +65,7 @@ public class EtudiantController {
      */
     @PutMapping
     public ResponseEntity modifierEtudiant(
-            @RequestBody  Etudiant etudiant) throws EtudiantInconnuExecption {
+            @RequestBody  EtudiantDto etudiant) throws EtudiantInconnuExecption {
         etudiantService.updateEtudiant(etudiant);
         return ResponseEntity.ok().build();
     }

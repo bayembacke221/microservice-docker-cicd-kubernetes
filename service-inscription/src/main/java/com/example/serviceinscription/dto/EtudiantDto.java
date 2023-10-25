@@ -1,4 +1,12 @@
 package com.example.serviceinscription.dto;
 
-public class EtudiantDto {
+import lombok.*;
+
+
+
+public record EtudiantDto(String numCarte,
+                          String prenom,
+                          String nom,
+                          String classe) {
+
 }
