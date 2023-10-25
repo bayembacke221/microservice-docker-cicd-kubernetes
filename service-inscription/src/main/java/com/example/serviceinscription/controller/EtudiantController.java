@@ -4,7 +4,6 @@ package com.example.serviceinscription.controller;
 import com.example.serviceinscription.dto.EtudiantDto;
 import com.example.serviceinscription.exception.EtudiantInconnuExecption;
 import com.example.serviceinscription.exception.InvalideEtudiantException;
-import com.example.serviceinscription.model.Etudiant;
 import com.example.serviceinscription.service.EtudiantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

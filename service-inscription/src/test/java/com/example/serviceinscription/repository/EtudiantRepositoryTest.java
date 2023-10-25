@@ -19,13 +19,13 @@ import java.util.Optional;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
-public class EtudiantRepositoryTest {
+ class EtudiantRepositoryTest {
 
     @Autowired
     private EtudiantRepository etudiantRepository;
 
     @Test
-    public void ajouterNouveauEtudiant() {
+     void ajouterNouveauEtudiant() {
 
         Etudiant etudiant = etudiantRepository.save(new Etudiant("20180834", "Moustapha", "Diop", "Lic1"));
         assertNotNull(etudiant);
@@ -33,21 +33,21 @@ public class EtudiantRepositoryTest {
     }
 
     @Test
-    public void updateEtudiant(){
+     void updateEtudiant(){
         Etudiant etudiant = etudiantRepository.save(new Etudiant("20180834", "Moustapha", "Diop", "Lic1"));
         etudiant.setNom("Fall");
         etudiantRepository.save(etudiant);
         assertEquals("Fall", etudiant.getNom());
     }
     @Test
-    public void findByNumCarte(){
+     void findByNumCarte(){
         Etudiant etudiant = etudiantRepository.findByNumCarte("20180834");
         assertNotNull(etudiant);
         assertEquals("20180834", etudiant.getNumCarte());
 
     }
     @Test
-    public void getAllEtudiant(){
+     void getAllEtudiant(){
         List<Etudiant> etudiants = new ArrayList<>();
         etudiants.add(new Etudiant("2018084DE", "Moustapha", "Diop", "Lic1"));
         etudiants.add(new Etudiant("201707JDH", "Khadim", "Fall", "Lic2"));
@@ -60,7 +60,7 @@ public class EtudiantRepositoryTest {
     }
 
     @Test
-    public void deleteEtudiant(){
+     void deleteEtudiant(){
         Etudiant etudiant = etudiantRepository.save(new Etudiant("20180834", "Moustapha", "Diop", "Lic1"));
         etudiantRepository.delete(etudiantRepository.findByNumCarte(etudiant.getNumCarte()));
 

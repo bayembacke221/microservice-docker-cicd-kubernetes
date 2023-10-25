@@ -78,7 +78,7 @@ public class EtudiantSeviceImpl implements EtudiantService {
     public List<EtudiantDto> getAllEtudiant() {
         return etudiantRepository.findAll().stream()
                 .map(etudiantDtoMapper)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     /**

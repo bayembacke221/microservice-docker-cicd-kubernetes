@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class EtudiantTest {
+ class EtudiantTest {
 
     @Test
-    public void testGetterAndSetters() {
+     void testGetterAndSetters() {
         // GIVEN
         Etudiant etudiant = new Etudiant();
 
@@ -25,7 +25,7 @@ public class EtudiantTest {
     }
 
     @Test
-    public void testEquals() {
+     void testEquals() {
         // GIVEN
         Etudiant etudiant1 = new Etudiant("123456789", "John", "Doe", "T3A");
         Etudiant etudiant2 = new Etudiant("123456789", "John", "Doe", "T3A");
@@ -35,7 +35,7 @@ public class EtudiantTest {
     }
 
     @Test
-    public void testHashCode() {
+     void testHashCode() {
         // GIVEN
         Etudiant etudiant1 = new Etudiant("123456789", "John", "Doe", "T3A");
         Etudiant etudiant2 = new Etudiant("123456789", "John", "Doe", "T3A");

@@ -16,10 +16,10 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ErrorHandlerTest {
+ class ErrorHandlerTest {
 
     @Test
-    public void testHandleInvalideEtudiantException() {
+     void testHandleInvalideEtudiantException() {
         // GIVEN
         InvalideEtudiantException exception = new InvalideEtudiantException("L'étudiant est invalide");
         ErrorHandler errorHandler = new ErrorHandler();
@@ -33,7 +33,7 @@ public class ErrorHandlerTest {
     }
 
     @Test
-    public void testHandleEtudiantInconnuException() {
+     void testHandleEtudiantInconnuException() {
         // GIVEN
         EtudiantInconnuExecption exception = new EtudiantInconnuExecption("L'étudiant n'existe pas");
         ErrorHandler errorHandler = new ErrorHandler();
