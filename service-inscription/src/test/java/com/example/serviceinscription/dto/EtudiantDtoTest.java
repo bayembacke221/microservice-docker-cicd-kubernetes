@@ -36,3 +36,4 @@ import static org.junit.jupiter.api.Assertions.*;
         assertEquals(expectedToString, etudiantDto.toString());
     }
 }
+
