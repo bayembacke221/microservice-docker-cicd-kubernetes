@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiAdmissionService {
 
-  constructor() { }
+  private static urlApi = 'http://localhost:8083/admission';
+  constructor(private http: HttpClient) { }
+
+  getListeAdmission() {
+    return this.http.get(`${ApiAdmissionService.urlApi}/all`)
+  }
 }
