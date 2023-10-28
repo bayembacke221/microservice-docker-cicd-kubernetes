@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inscription
+  labels:
+    app: inscription
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: inscription
+      labels:
+        app: inscription
+    spec:
+      containers:
+        - name: inscription
+          image: bayembacke221/inscription:0.0.1-SNAPSHOT
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: kube
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: inscription
