@@ -35,7 +35,7 @@ pipeline{
             steps{
                 bat 'docker psuh bayembacke221/inscription:0.0.1-SNAPSHOT -f "service-inscription"'
             }
-        } **/
+        }
         stage('Approve Deployment') {
               input {
                 message "Do you want to proceed for deployment?"
@@ -43,7 +43,7 @@ pipeline{
               steps {
                 sh 'echo "Deploying into Server"'
               }
-        }
+        }**/
     }
 
 
